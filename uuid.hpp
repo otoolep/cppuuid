@@ -29,14 +29,7 @@ class ClockSeqOutOfRangeException : public std::exception
 
 
 ////////////////////////////////////////////////////////////////////////////////
-// Enums
-
-enum variant {
-    RESERVED_NCS,
-    RFC_4122,
-    RESERVED_MICROSOFT,
-    RESERVED_FUTURE
-};
+// UUID Class definition.
 
 class Uuid
 {
@@ -54,6 +47,7 @@ class Uuid
     //getnode();
 
   private:
+    static const uint64_t version_ = 1;
     // Store the 128-bit UUID as two 64-bit integers.
     uint64_t upper_;
     uint64_t lower_;

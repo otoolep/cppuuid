@@ -105,6 +105,14 @@ Uuid::Uuid(uint32_t time_low, uint16_t time_mid, uint16_t time_hi_version,
 
     lower_ = (uint64_t) clock_seq << 48;
     lower_ |= node << 16;
+
+    // Set the variant to RFC 4122.
+    lower_ &= ~((uint64_t)0xc000 << 48);
+    lower_ |= (uint64_t)0x8000 << 48;
+
+    // Set the version number.
+    upper_ &= ~0xf000;
+    upper_ |= Uuid::version_ << 12;
 }
 
 } // namespace uuid
