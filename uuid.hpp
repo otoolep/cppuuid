@@ -9,8 +9,27 @@
 #include <inttypes.h>
 #include <map>
 #include <string>
+#include <exception>
 
 namespace uuid {
+
+////////////////////////////////////////////////////////////////////////////////
+// Exceptions
+//
+
+class NodeOutOfRangeException : public std::exception
+{
+    const char* what() { return ("Node out of range"); }
+};
+
+class ClockSeqOutOfRangeException : public std::exception
+{
+    const char* what() { return ("Clock sequence out of range"); }
+};
+
+
+////////////////////////////////////////////////////////////////////////////////
+// Enums
 
 enum variant {
     RESERVED_NCS,
@@ -22,9 +41,8 @@ enum variant {
 class Uuid
 {
   public:
-
-    static uint64_t gettime();
-
+    Uuid(uint32_t time_low, uint16_t time_mid, uint16_t time_hi_version,
+         uint8_t clock_seq_low, uint8_t clock_seq_hi_variant, uint64_t node);
     std::string bytes();
     std::string bytes_le();
     std::map<std::string, uint64_t> fields();
@@ -36,10 +54,9 @@ class Uuid
     //getnode();
 
   private:
-    // Number of 100-ns intervals between the UUID epoch 1582-10-15 00:00:00 and
-    // the Unix epoch 1970-01-01 00:00:00. Ref: uuid.py
-    static uint64_t num_100nsec_1582_1970;
-    static uint64_t last_uuid_time;
+    // Store the 128-bit UUID as two 64-bit integers.
+    uint64_t upper_;
+    uint64_t lower_;
 
     static uint16_t getclockseq();
 };
