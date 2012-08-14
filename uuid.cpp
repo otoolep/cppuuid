@@ -74,13 +74,13 @@ Uuid uuid1(uint64_t node, uint16_t clock_seq)
     uint64_t ns100_intervals = gettime();
 
     uint32_t time_low = ns100_intervals & 0xffffffff;
-    uint16_t time_mid = (ns100_intervals >> 32) & 0xfff;
+    uint16_t time_mid = (ns100_intervals >> 32) & 0xffff;
     uint16_t time_hi_version = (ns100_intervals >> 48) & 0xfff;
     uint8_t clock_seq_low = clock_seq & 0xff;
     uint8_t clock_seq_hi_variant = (clock_seq >> 8) & 0x3f;
 
-    return Uuid(time_low, time_mid, time_hi_version, clock_seq_hi_variant,
-                    clock_seq_low, node);
+    return Uuid(time_low, time_mid, time_hi_version, clock_seq_low,
+                    clock_seq_hi_variant, node);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -104,7 +104,7 @@ Uuid::Uuid(uint32_t time_low, uint16_t time_mid, uint16_t time_hi_version,
     clock_seq |= clock_seq_low;
 
     lower_ = (uint64_t) clock_seq << 48;
-    lower_ |= node << 16;
+    lower_ |= node;
 
     // Set the variant to RFC 4122.
     lower_ &= ~((uint64_t)0xc000 << 48);
@@ -113,6 +113,10 @@ Uuid::Uuid(uint32_t time_low, uint16_t time_mid, uint16_t time_hi_version,
     // Set the version number.
     upper_ &= ~0xf000;
     upper_ |= Uuid::version_ << 12;
+}
+
+std::string Uuid::hex()
+{
 }
 
 } // namespace uuid
