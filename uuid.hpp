@@ -7,6 +7,7 @@
 #pragma once
 
 #include <inttypes.h>
+#include <utility>
 #include <map>
 #include <string>
 #include <exception>
@@ -40,11 +41,7 @@ class Uuid
     std::string bytes_le();
     std::map<std::string, uint64_t> fields();
     std::string hex();
-    std::string integer();
-    std::string urn();
-    //variant();
-    //version();
-    //getnode();
+    std::pair<uint64_t, uint64_t> integer();
 
   private:
     static const uint64_t version_ = 1;

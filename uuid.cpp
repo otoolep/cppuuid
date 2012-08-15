@@ -125,4 +125,9 @@ std::string Uuid::hex()
     return std::string(buff);
 }
 
+std::pair <uint64_t, uint64_t> Uuid::integer()
+{
+    return std::make_pair(upper_, lower_);
+}
+
 } // namespace uuid
