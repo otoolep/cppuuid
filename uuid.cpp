@@ -4,6 +4,8 @@
 // Implementation.
 //
 
+#include <string>
+#include <stdio.h>
 #include <time.h>
 #include "uuid.hpp"
 
@@ -117,6 +119,10 @@ Uuid::Uuid(uint32_t time_low, uint16_t time_mid, uint16_t time_hi_version,
 
 std::string Uuid::hex()
 {
+    // 2 bytes per character in upper_ and lower_, plus '\0'.
+    char buff[sizeof(upper_) * 4];
+    sprintf(buff, "%llx%llx", upper_, lower_);
+    return std::string(buff);
 }
 
 } // namespace uuid
