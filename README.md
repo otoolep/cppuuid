@@ -1,10 +1,8 @@
 cppuuid
 =======
 
-C++ UUID support inspired by Python's UUID class (uuid.py).
+C++ UUID support inspired by Python's UUID class. For more details see:
 
-Quick demo:
+    http://docs.python.org/library/uuid.html
 
-uuid::Uuid u = uuid::uuid1((uint64_t) 0x19432987, (uint16_t) 0x33);
-std::cout << u.hex() << std::endl;
-std::cout <<  std::pair<uint64_t, uint64_t>p = u.integer() << std::endl;
+As long as the underlying hardware clock has a resolution greater than 100ns, this code can produce type-1 UUIDs at a rate greater than 10 million per second. There is a small demo in main.cpp.
