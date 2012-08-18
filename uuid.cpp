@@ -40,7 +40,7 @@ static uint64_t gettime()
     uuid_time = uuid_time + kNum_100nsec_1582_1970;
 
     // If the clock looks like it went backwards, or is the same, increment it.
-    if (last_uuid_time != 0 && uuid_time <= uuid_time) {
+    if (last_uuid_time <= uuid_time) {
         uuid_time = last_uuid_time + 1;
     }
     last_uuid_time = uuid_time;
