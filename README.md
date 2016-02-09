@@ -1,7 +1,7 @@
 cppuuid
 =======
 
-C++ UUID support inspired by Python's UUID class. For more details see:
+C++ UUID support inspired by [Python's UUID](https://docs.python.org/2/library/uuid.html) package. For more details see:
 
     http://docs.python.org/library/uuid.html
 
