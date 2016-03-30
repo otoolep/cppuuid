@@ -3,8 +3,6 @@
 // main.cpp
 //
 // Demo program showing how to use Uuid class.
-//
-// Compile using `g++ main.cpp uuid.cpp -lrt -o uuid`
 
 #include <iostream>
 #include "uuid.hpp"
