@@ -7,6 +7,7 @@
 #include <string>
 #include <stdio.h>
 #include <time.h>
+#include <arpa/inet.h>
 #include "uuid.hpp"
 
 namespace uuid {
@@ -96,9 +97,9 @@ Uuid::Uuid(uint32_t time_low, uint16_t time_mid, uint16_t time_hi_version,
     lower_ = 0;
 
     // Build the high 4 bytes.
-    upper_ = (uint64_t) time_low << 32;
-    upper_ |= (uint64_t) time_mid << 16;
-    upper_ |= (uint64_t) time_hi_version;
+    upper_ = ((uint64_t) htonl(time_low)) << 32;
+    upper_ |= ((uint64_t) htons(time_mid)) << 16;
+    upper_ |= ((uint64_t) htons(time_hi_version));
 
     // Build the low 4 bytes, using the clock sequence number.
     uint16_t clock_seq = 0;
