@@ -10,4 +10,4 @@ As long as the underlying hardware clock has a resolution greater than 100ns, th
 ## Building
 To build the example program simply execute `make`.
 
-(c) Philip O'Toole http://www.philipotoole.com
+(c) Philip O'Toole https://www.philipotoole.com
